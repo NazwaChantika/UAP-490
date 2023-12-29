@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UAP WEB</title>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Nama</th>
+          <th>Harga</th>
+        </tr>
+      </thead>
+      <tbody id="DaftarBarang"></tbody>
+    </table>
+    <h1>Inputan User</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <td>Masukan Kode</td>
+          <td>:</td>
+          <td><input type="text" id="input1" /></td>
+        </tr>
+        <tr>
+          <td>Banyak Barang</td>
+          <td>:</td>
+          <td><input type="text" id="input2" /></td>
+        </tr>
+        <tr>
+          <td>
+            <button onclick="addBarang()">Submit</button>
+          </td>
+        </tr>
+      </thead>
+    </table>
+
+    <script>
+      const barang = {
+        "001": { nama: "BarangA", harga: 10000 },
+        "002": { nama: "BarangB", harga: 20000 },
+        "003": { nama: "BarangC", harga: 30000 },
+      };
+
+      function showDaftarBarang() {
+        const daftarBarangElement = document.getElementById("DaftarBarang");
+
+        for (const kode in barang) {
+          const { nama, harga } = barang[kode];
+
+          const row = document.createElement("tr");
+
+          const kodein = document.createElement("td");
+          kodein.textContent = kode;
+          row.appendChild(kodein);
+
+          const namain = document.createElement("td");
+          namain.textContent = nama;
+          row.appendChild(namain);
+
+          const hargain = document.createElement("td");
+          hargain.textContent = harga;
+          row.appendChild(hargain);
+
+          daftarBarangElement.appendChild(row);
+        }
+      }
+
+      function addBarang() {
+        var kodeBarang = document.getElementById("input1").value;
+        var banyakBarang = document.getElementById("input2").value;
+
+        if (barang.hasOwnProperty(kodeBarang)) {
+          var hargaBarang = barang[kodeBarang].harga;
+
+          var totalbayar = banyakBarang * hargaBarang;
+
+          alert("Total Pembayarannya adalah " + totalbayar);
+
+          var jumlah = prompt("Masukan Uang User: ");
+
+          var kembalian = jumlah - totalbayar;
+
+          alert("kembalian " + kembalian);
+        } else {
+          alert("Kode Barang Invalid");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        showDaftarBarang();
+      });
+    </script>
+  </body>
+</html>
+
